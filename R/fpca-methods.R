@@ -13,7 +13,7 @@
 ##' @method residuals rfr_fpca
 ##' @aliases fitted.rfr_fpca
 ##' @export
-residuals.rfr_fpca <- function(object, ...){
+residuals.rfr_fpca <- function(object, ...) {
   object$Y - tfd(object$Yhat_tfb, arg = tf_arg(object$Y))
 }
 
@@ -21,7 +21,7 @@ residuals.rfr_fpca <- function(object, ...){
 ##' @method fitted rfr_fpca
 ##' @export
 ##' @rdname residuals.rfr_fpca
-fitted.rfr_fpca <- function(object, ...){
+fitted.rfr_fpca <- function(object, ...) {
   tfd(object$Yhat_tfb, arg = tf_arg(object$Y))
 }
 
@@ -38,10 +38,10 @@ fitted.rfr_fpca <- function(object, ...){
 ##' @importFrom stats fitted fitted.values
 ##' @method predict rfr_fpca
 ##' @export
-predict.rfr_fpca <- function(object, newdata, ...){
+predict.rfr_fpca <- function(object, newdata, ...) {
   ## need different behavior for regular vs. irregular objects?
-   # nah, just need to make sure it works for irregular objects.
-    # default behavior (with no new data) is to return fitted values
+  # nah, just need to make sure it works for irregular objects.
+  # default behavior (with no new data) is to return fitted values
   if (missing(newdata) || is.null(newdata)) {
     return(fitted(object))
   }
@@ -49,16 +49,16 @@ predict.rfr_fpca <- function(object, newdata, ...){
   ## include some data checks -- args for new data and fpc expansion, etc
   ## also that `model_var` is included in `newdata`
 
-  model_var = object$model_var
-  new_tf = newdata[[model_var]]
+  model_var <- object$model_var
+  new_tf <- newdata[[model_var]]
 
-  Ypred = as.matrix(spread(tf_unnest(new_tf), key = .data$arg, value = .data$value)[,-1])
+  Ypred <- as.matrix(spread(tf_unnest(new_tf), key = .data$arg, value = .data$value)[, -1])
 
-  new_scores = estimate_fpc_scores(object, Ypred)
+  new_scores <- estimate_fpc_scores(object, Ypred)
 
   coef_list <- split(cbind(1, new_scores), row(cbind(1, new_scores)))
 
-  tfb_ob = object$Yhat_tfb
+  tfb_ob <- object$Yhat_tfb
 
   structure(
     coef_list,
@@ -72,5 +72,4 @@ predict.rfr_fpca <- function(object, newdata, ...){
     error_variance = attr(tfb_ob, "error_variance"),
     class = c("tfb_fpc", "tfb", "tf", "vctrs_vctr")
   )
-
 }

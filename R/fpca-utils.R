@@ -1,17 +1,17 @@
 ##' Convert tfb_fpc object to a list
 ##' @param tfb_fpc_obj object turned by `tfb_fpc`
 ##' @importFrom stats coefficients
-extract_fpca <- function(tfb_fpc_obj){
+extract_fpca <- function(tfb_fpc_obj) {
   # may change this to not return the basis object
-  N = length(tfb_fpc_obj)
-  efunctions = attr(tfb_fpc_obj, "basis_matrix")
-  evalues = attr(tfb_fpc_obj, "score_variance")
-  npc = length(evalues)
-  error_var = attr(tfb_fpc_obj, "error_variance")
+  N <- length(tfb_fpc_obj)
+  efunctions <- attr(tfb_fpc_obj, "basis_matrix")
+  evalues <- attr(tfb_fpc_obj, "score_variance")
+  npc <- length(evalues)
+  error_var <- attr(tfb_fpc_obj, "error_variance")
 
-  coef_list = coefficients(tfb_fpc_obj)
-  score_list = lapply(coef_list, "[", -1)  #drop intercepts
-  scores = do.call("rbind", score_list)
+  coef_list <- coefficients(tfb_fpc_obj)
+  score_list <- lapply(coef_list, "[", -1) # drop intercepts
+  scores <- do.call("rbind", score_list)
 
   fpca_obj <- list(
     Yhat_tfb = tfb_fpc_obj,
@@ -48,12 +48,10 @@ extract_fpca <- function(tfb_fpc_obj){
 #'   refundr:::extract_fpca() %>%
 #'   refundr:::extract_fpc_scores()
 #'
-extract_fpc_scores = function(rfr_fpca_obj){
+extract_fpc_scores <- function(rfr_fpca_obj) {
+  score_mat <- rfr_fpca_obj$scores
 
-  score_mat = rfr_fpca_obj$scores
-
-  colnames(score_mat) = str_c(rfr_fpca_obj$model_var, 1:dim(score_mat)[2], sep = "_score_")
+  colnames(score_mat) <- str_c(rfr_fpca_obj$model_var, 1:dim(score_mat)[2], sep = "_score_")
 
   as_tibble(score_mat)
-
 }

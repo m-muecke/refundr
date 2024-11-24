@@ -1,7 +1,7 @@
 #' refundr
 #'
 #'
-#'@description  `refundr` makes functional data analyses
+#' @description  `refundr` makes functional data analyses
 #' in `R` more consistent and user friendly\cr\cr
 #' `refundr` provides:
 #' - tidy interface for common fpca methods and funcional regression

@@ -37,7 +37,7 @@
 ##' @import tidyfun
 ##' @importFrom dplyr pull
 ##' @importFrom rlang enquo `!!`
-rfr_fpca <- function(Y, data, pve = 0.99, npc = NULL, method = NULL, ...){
+rfr_fpca <- function(Y, data, pve = 0.99, npc = NULL, method = NULL, ...) {
   UseMethod("rfr_fpca", pull(data, !!enquo(Y)))
 }
 
@@ -46,7 +46,7 @@ rfr_fpca <- function(Y, data, pve = 0.99, npc = NULL, method = NULL, ...){
 #' @importFrom dplyr mutate
 #' @importFrom rlang `:=`
 #' @export
-rfr_fpca.tfb <- function(Y, data, pve = 0.99, npc = NULL, ...){
-  data = mutate(data, !!enquo(Y) := tfd(!!enquo(Y)))
+rfr_fpca.tfb <- function(Y, data, pve = 0.99, npc = NULL, ...) {
+  data <- mutate(data, !!enquo(Y) := tfd(!!enquo(Y)))
   rfr_fpca(Y = !!enquo(Y), data = data, pve = .99, npc = npc, ...)
 }
