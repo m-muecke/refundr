@@ -13,9 +13,6 @@ estimate_fpc_scores(tfb_fpc_obj, Ypred, method = "blup")
 
 \item{method}{BLUPs or Numeric integration. Only BLUPs currently implemented}
 }
-\value{
-
-}
 \description{
 estimate_fpc_scores
 }

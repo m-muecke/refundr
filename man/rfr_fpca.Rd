@@ -49,11 +49,11 @@ objects are input and tidy objects are returned as well.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{tfd_irreg}: FPCA for data on irregular grids defaults to \code{\link[refund:fpca.sc]{refund::fpca.sc()}}
+\item \code{rfr_fpca(tfd_irreg)}: FPCA for data on irregular grids defaults to \code{\link[refund:fpca.sc]{refund::fpca.sc()}}
 
-\item \code{tfd_reg}: FPCA for data on a regular grid defaults to \code{\link[refund:fpca.face]{refund::fpca.face()}}
+\item \code{rfr_fpca(tfd_reg)}: FPCA for data on a regular grid defaults to \code{\link[refund:fpca.face]{refund::fpca.face()}}
+
 }}
-
 \examples{
 \dontrun{
 library(refundr)
